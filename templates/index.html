@@ -1,0 +1,65 @@
+{{ fontawesome_html() }}
+{% extends "bootstrap/base.html" %}
+{% block styles %}
+    {{ super() }}
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
+{% block content %}
+
+		<form action="/nuevo" method="post" style="margin:15px">
+		  <label for="fname">Filas:</label><br>
+		  <input type="text" id="filas" name="filas" value="10"><br>
+		  <label for="lname">Columnas:</label><br>
+		  <input type="text" id="columnas" name="columnas" value="10"><br>
+		  <label for="lname">Obstáculos:</label><br>
+		  <input type="text" id="obstaculos" name="obstaculos" value="0.35"><br><br>
+		  <input class="btn btn-primary" type="submit" value="Nuevo Laberinto">
+		<button type="button" class="btn btn-primary" onclick="location.href='/candidatos'">Candidatos</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/solve'">Resolver</button>
+		</form>
+
+
+    	<div class="" style="width:100%">
+		{% if layout != None %}
+			<div style="width:100%">
+				<div class="col-36 col-md-36 my-3">
+					<div class="container maze-container" id="maze">
+						{% for row in layout %}
+							<div class="maze-line">
+								{% for x in row %}
+									<pre style="
+									{% if x == 'X' %}
+										background-color:black
+									{% endif %}
+									{% if x == 'E' %}
+										background-color:yellow
+									{% endif %}
+									{% if x == 'S' %}
+										background-color:Green
+									{% endif %}
+									{% if x == '=' %}
+										background-color:Blue
+									{% endif %}
+									{% if x == 'C' %}
+										background-color:Orange
+									{% endif %}
+									{% if x == 'V' %}
+										background-color:Purple
+									{% endif %}
+									">{{ x }}</pre>
+								{% endfor %} 
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		{% endif %}
+
+	</div>
+
+
+
+
+
+	
+{% endblock %}
